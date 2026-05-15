@@ -1,1 +1,4 @@
-node_modules/\n*.log\n.env
+node_modules/
+*.log
+.env
+*.bak_*
