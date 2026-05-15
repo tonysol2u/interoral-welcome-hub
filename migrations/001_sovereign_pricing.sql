@@ -1,7 +1,4 @@
--- ═══════════════════════════════════════════════════════════════
--- SOVEREIGN PRICING TABLE
--- Managed entirely from admin UI. Left EMPTY for manual population.
--- ═══════════════════════════════════════════════════════════════
+-- Run on your Postgres: psql $DATABASE_URL < migrations/001_sovereign_pricing.sql
 
 CREATE TABLE IF NOT EXISTS sovereign_pricing (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
