@@ -1,0 +1,8 @@
+◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[SHADOW] Shadow Agent running on 3001
+◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[SHADOW] Shadow Agent running on 3001
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+[SHADOW] Shadow Agent running on 3001
+◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[SHADOW] Shadow Agent running on 3001

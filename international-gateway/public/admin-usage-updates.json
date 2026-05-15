@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-05-06T20:12:33.390Z",
+  "totalCreditBalance": 300000,
+  "remainingCreditBalance": 292380,
+  "spikeThreshold": 5000,
+  "updates": [
+    {
+      "id": "usage-DR-2048-1778098353390",
+      "doctorId": "DR-2048",
+      "message": "Usage Update: DR-2048 used 7,200 agent credits. Heavy clinical agents should pause until reviewed.",
+      "severity": "warning",
+      "creditsUsed": 7200,
+      "createdAt": "2026-05-06T20:12:33.390Z"
+    }
+  ]
+}

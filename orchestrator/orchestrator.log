@@ -1,0 +1,18 @@
+◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[ORCHESTRATOR] running on port 3002
+[REX] Ollama brand identification failed: fetch failed
+[ORCHESTRATOR] -> Relu design API
+[SPRING] Status update failed: fetch failed
+[ORCHESTRATOR] Case MEDIT-SMOKE-001 routed -> relu
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+[ORCHESTRATOR] running on port 3002
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[ORCHESTRATOR] running on port 3002
+◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[ORCHESTRATOR] running on port 3002
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+[ORCHESTRATOR] running on port 3002
+◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[ORCHESTRATOR] running on port 3002
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+[ORCHESTRATOR] running on port 3002
