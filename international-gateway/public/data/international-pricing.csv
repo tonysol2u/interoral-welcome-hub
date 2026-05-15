@@ -1,0 +1,125 @@
+Category,Product,Base_Cost,DSO_Price,Dentist_Price
+Framework,Co-Cr Framework,34,54,93
+Framework,Vitallium Framework,65,103,177
+Framework,Clear Framework,52,83,142
+Denture,Teeth 1-4,24,38,66
+Denture,Teeth 5-8,32,51,87
+Denture,Teeth 9-13,40,64,109
+Denture,Full Denture,50,80,137
+Denture,Luctione 199/arch,12,19,33
+Flexible Partial,TCS Flexible One Stage,55,87,150
+Flexible Partial,TCS Flexible Process Only,45,72,123
+Flexible Partial,Valplast One Stage,65,103,177
+Flexible Partial,Valplast Process Only,55,87,150
+Removable Others,Wax Rim Only,8,13,22
+Removable Others,Light Cured Base & Rim,12,19,33
+Removable Others,Custom Tray,15,24,41
+Removable Others,Bleaching Tray,15,24,41
+Removable Others,Cast Clasp,10,16,27
+Removable Others,Flexible Clasp,20,32,55
+Removable Others,Tooth Color Clasp,25,40,68
+Removable Others,Wire Clasp,5,8,14
+Removable Others,Ball Clasp,7,11,19
+Removable Others,Wire Y-Clasp,10,16,27
+Removable Others,Add Teeth,10,16,27
+Removable Others,Mesh,20,32,55
+Removable Others,Reline,24,38,66
+Removable Others,Soft Reline,30,48,82
+Removable Others,Metal Backing/Occlusion,7,11,19
+Removable Others,Metal Teeth,12,19,33
+Removable Others,Duplicate Model,5,8,14
+Removable Others,Putty Stent,10,16,27
+Removable Others,Opaque to Framework,10,16,27
+Removable Others,Solder,15,24,41
+Removable Others,Place Name on Denture,3,5,8
+Ortho,Ortho Model,20,32,55
+Ortho,Hard Silensor,100,159,273
+Ortho,Soft Silensor,120,191,328
+Ortho,Shark Silensor,160,254,437
+Ortho,NTI Splint,18,29,49
+Ortho,Hard Night Guard,35,56,96
+Ortho,Soft Night Guard,30,48,82
+Ortho,Hard/Soft Night Guard,42,67,115
+Ortho,Surgical Stent,35,56,96
+Ortho,Gelb Guard,60,95,164
+Ortho,Space Maintainer,20,32,55
+Ortho,Cast Space Maintainer,36,57,98
+Ortho,Lingual Arch Space Maintainer,30,48,82
+Ortho,Essix Retainer,25,40,68
+Ortho,Hawley Retainer,28,45,76
+Ortho,Soldered Hawley Retainer,32,51,87
+Ortho,Standard Begg Retainer,32,51,87
+Ortho,Spring Hawley,35,56,96
+Ortho,Nance Appliance,28,45,76
+Ortho,Spring Appliance,35,56,96
+Ortho,Roberts Appliance,35,56,96
+Ortho,Screw Appliance,65,103,177
+Ortho,Tongue Barrier,30,48,82
+Ortho,Twin Blocks,100,159,273
+Ortho,Hyrax Rapid Palatal Expander,100,159,273
+Ortho,Quad Helix,35,56,96
+Ortho,Andersen,60,95,164
+Ortho,Bionator,90,143,246
+Ortho,Activator With Face Bow,90,143,246
+Ortho,Frankel,120,191,328
+Ortho,Pendulum,65,103,177
+PFM,PFM (Gold Extra Charge),22,35,60
+PFM,PFM (Ni Free),22,35,60
+PFM,PFM Metal Try In,12,19,33
+PFM,PFM Finish Porcelain,12,19,33
+PFM,Maryland Wing,15,24,41
+PFM,Porcelain Butt Margin,8,13,22
+PFM,Porcelain Butt Margin All Around,12,19,33
+FMC,FMC / Inlay,17,27,46
+FMC,FMC / Inlay (Ni Free),17,27,46
+FMC,FGC (Gold Extra Charge),17,27,46
+FMC,Post & Core,10,16,27
+FMC,Post,8,13,22
+Telescopic,Primary Crown (Gold Extra),40,64,109
+Telescopic,Secondary Crown (Gold Extra),30,48,82
+All Porcelain,E-Max Crown,54,86,147
+All Porcelain,E-Max Veneer,52,83,142
+All Porcelain,E-Max Inlay,50,80,137
+All Porcelain,Zirconia,35,56,96
+All Porcelain,Full Zirconia,25,40,68
+All Porcelain,Zirconia Coping,22,35,60
+All Porcelain,Zirconia Finish Porcelain,15,24,41
+Composite,Composite Crown,45,72,123
+Composite,Composite Inlay,40,64,109
+Composite,Composite Fused to Metal (Gold Extra),52,83,142
+Attachment,Key & Key Way,50,80,137
+Attachment,ERA,60,95,164
+Attachment,VKS,60,95,164
+Attachment,Swing Lock,50,80,137
+Attachment,Stress Breaker,50,80,137
+Attachment,Hader Bar / Each Section,50,80,137
+Attachment,Milling,25,40,68
+Attachment,Attachment Labor Fee,20,32,55
+Implant,Cast Implant Abutment (Gold Extra),20,32,55
+Implant,Titanium Custom Abutment (incl screw),59,94,161
+Implant,Zirconia Custom Abutment (incl screw),59,94,161
+Implant,Screw,10,16,27
+Implant,Analog,15,24,41
+Implant,Duralay Jig,12,19,33
+Implant,Pour Soft Tissue Model,15,24,41
+Implant,Prep Implant Abutment,18,29,49
+Implant,Titanium Bar Per Arch,600,954,1638
+Implant,All on 4 Full Zirconia Bridge Per Arch,600,954,1638
+Others,Diagnostic Wax Up,10,16,27
+Others,Temp Teeth,12,19,33
+Others,Pink Porcelain,12,19,33
+Others,Change Shade,10,16,27
+Others,Crown Fit to Partial,5,8,14
+Others,Survey Crown,5,8,14
+Others,Pour Model,5,8,14
+Others,Partial Indexes,5,8,14
+Others,Reduction Coping,8,13,22
+Model,3D Print Full Arch E-model,12,19,33
+Model,3D Print Half Arch E-model,6,10,16
+Model,Digital Implant Model,20,32,55
+Design,Design Full Contour,4,6,11
+Design,Design Coping,3,5,8
+Design,Design Implant,5,8,14
+Design,Design Framework,15,24,41
+Design,Design Night Guard,10,16,27
+Design,Design Full Denture,15,24,41
