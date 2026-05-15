@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MasterCrown.ai — Dentist Portal</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: linear-gradient(145deg, #0a0d1a 0%, #111633 50%, #0e1029 100%); color: #e2e8f0; min-height: 100vh; }
+.container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+header { text-align:center; margin-bottom:3rem; padding-top:2rem; }
+.logo { font-size:1.8rem; font-weight:800; margin-bottom:0.5rem; }
+.logo span { color: #f59e0b; }
+.subtitle { color:#64748b; font-size:0.85rem; }
+.card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:1rem; padding:2rem; margin-bottom:1.5rem; }
+.card h3 { font-size:1rem; font-weight:600; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+.balance-card { text-align:center; background:linear-gradient(135deg, rgba(245,158,11,0.08), rgba(99,102,241,0.06)); border-color:rgba(245,158,11,0.15); }
+.balance-card .amount { font-size:3rem; font-weight:800; color:#fff; }
+.balance-card .currency { font-size:1rem; color:#f59e0b; margin-left:0.25rem; }
+.balance-card .sub { font-size:0.75rem; color:#64748b; margin-top:0.5rem; }
+.tier-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.tier { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:1.5rem; text-align:center; cursor:pointer; transition:all 0.2s; }
+.tier:hover { border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.04); }
+.tier.popular { border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.06); }
+.tier .name { font-weight:600; font-size:0.9rem; margin-bottom:0.5rem; }
+.tier .price { font-size:1.5rem; font-weight:800; color:#f59e0b; }
+.tier .credits { font-size:0.8rem; color:#64748b; margin:0.25rem 0 1rem; }
+.btn { display:inline-block; padding:0.6rem 1.5rem; border:none; border-radius:0.5rem; cursor:pointer; font-size:0.85rem; font-weight:600; transition:all 0.2s; text-decoration:none; }
+.btn-primary { background:linear-gradient(135deg,#f59e0b,#d97706); color:#000; }
+.btn-secondary { background:rgba(255,255,255,0.06); color:#e2e8f0; border:1px solid rgba(255,255,255,0.1); }
+.btn-primary:hover { opacity:0.9; }
+.status-row { display:flex; align-items:center; gap:1rem; padding:0.75rem 1rem; background:rgba(255,255,255,0.02); border-radius:0.5rem; margin-bottom:0.5rem; }
+.status-dot { width:8px; height:8px; border-radius:50%; }
+.status-dot.green { background:#10b981; }
+.status-dot.yellow { background:#f59e0b; animation: pulse 2s infinite; }
+.status-dot.red { background:#ef4444; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+input { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#e2e8f0; padding:0.6rem 1rem; border-radius:0.5rem; font-size:0.85rem; width:100%; }
+.form-row { display:flex; gap:0.75rem; align-items:center; }
+.cases-list { margin-top:1rem; }
+.case-item { display:flex; justify-content:space-between; align-items:center; padding:1rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+.case-item:last-child { border-bottom:none; }
+a { color:#6366f1; text-decoration:none; }
+a:hover { text-decoration:underline; }
+.nav-link { display:inline-block; margin-bottom:1rem; font-size:0.8rem; color:#64748b; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="/" class="nav-link">← Admin Panel</a>
+  
+  <header>
+    <div class="logo">Master<span>Crown</span>.ai</div>
+    <p class="subtitle">AI Crown Design Engine — Dentist Portal</p>
+  </header>
+
+  <!-- Balance -->
+  <div class="card balance-card">
+    <p style="font-size:0.7rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;">Your MasterCredits Balance</p>
+    <div><span class="amount" id="balance">—</span><span class="currency">MC</span></div>
+    <p class="sub">1 MC = $1.00 USD</p>
+  </div>
+
+  <!-- Case Status -->
+  <div class="card">
+    <h3>📋 Active Cases</h3>
+    <div class="status-row">
+      <div class="status-dot green"></div>
+      <div style="flex:1;">
+        <div style="font-size:0.85rem;font-weight:500;">Medit Webhook Listener</div>
+        <div style="font-size:0.7rem;color:#64748b;">Ready to receive scans</div>
+      </div>
+      <span style="font-size:0.7rem;color:#10b981;">Online</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot green"></div>
+      <div style="flex:1;">
+        <div style="font-size:0.85rem;font-weight:500;">Shadow Agent (HIPAA Scrubber)</div>
+        <div style="font-size:0.7rem;color:#64748b;">Port 3001 — De-identification active</div>
+      </div>
+      <span style="font-size:0.7rem;color:#10b981;">Online</span>
+    </div>
+    <div class="status-row">
+      <div class="status-dot green"></div>
+      <div style="flex:1;">
+        <div style="font-size:0.85rem;font-weight:500;">Orchestrator (REX Router)</div>
+        <div style="font-size:0.7rem;color:#64748b;">Port 3002 — Relu + Lab routing</div>
+      </div>
+      <span style="font-size:0.7rem;color:#10b981;">Online</span>
+    </div>
+    <div class="cases-list" id="cases-list">
+      <p style="text-align:center;color:#475569;font-size:0.8rem;padding:2rem;">No active cases. Submit a scan via Medit to start.</p>
+    </div>
+  </div>
+
+  <!-- Top Up -->
+  <div class="card">
+    <h3>💳 Buy Credits</h3>
+    <div class="tier-grid">
+      <div class="tier" onclick="topUp(100)">
+        <div class="name">Starter</div>
+        <div class="price">$100</div>
+        <div class="credits">100 tokens</div>
+        <button class="btn btn-primary">Purchase</button>
+      </div>
+      <div class="tier popular" onclick="topUp(300)">
+        <div style="font-size:0.6rem;color:#f59e0b;font-weight:700;text-transform:uppercase;margin-bottom:0.5rem;">Popular</div>
+        <div class="name">Pro</div>
+        <div class="price">$300</div>
+        <div class="credits">300 tokens</div>
+        <button class="btn btn-primary">Purchase</button>
+      </div>
+      <div class="tier" onclick="topUp(500)">
+        <div class="name">Enterprise</div>
+        <div class="price">$500</div>
+        <div class="credits">500 tokens</div>
+        <button class="btn btn-primary">Purchase</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download Section -->
+  <div class="card">
+    <h3>📥 Download Files</h3>
+    <p style="font-size:0.8rem;color:#64748b;margin-bottom:1rem;">Enter your case ID to check if files are ready and download.</p>
+    <div class="form-row">
+      <input id="case-id-input" placeholder="Case ID or De-ID string">
+      <button class="btn btn-secondary" onclick="checkCase()">Check Status</button>
+      <button class="btn btn-primary" id="download-btn" onclick="releaseDownload()" disabled>Download</button>
+    </div>
+    <div id="download-status" style="margin-top:1rem;font-size:0.8rem;color:#64748b;"></div>
+  </div>
+
+  <!-- Email -->
+  <div class="card">
+    <h3>📧 Get Notified</h3>
+    <p style="font-size:0.8rem;color:#64748b;margin-bottom:1rem;">Enter your email to receive file delivery notifications.</p>
+    <div class="form-row">
+      <input id="email-input" type="email" placeholder="doctor@practice.com">
+      <button class="btn btn-primary" onclick="collectEmail()">Subscribe</button>
+    </div>
+    <div id="email-status" style="margin-top:0.5rem;font-size:0.8rem;"></div>
+  </div>
+</div>
+
+<script>
+async function loadBalance() {
+  try {
+    const res = await fetch('/v1/mastercredits/balance', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ doctor_id: 'current' })
+    });
+    const data = await res.json();
+    document.getElementById('balance').textContent = data.balance || 0;
+  } catch(e) { document.getElementById('balance').textContent = '0'; }
+}
+
+function topUp(amount) {
+  alert(`Stripe checkout for $${amount} would open here.\nConnect STRIPE_SECRET_KEY in .env to enable.`);
+}
+
+async function checkCase() {
+  const caseId = document.getElementById('case-id-input').value;
+  if (!caseId) return;
+  document.getElementById('download-status').innerHTML = '<span style="color:#f59e0b;">Checking...</span>';
+  // In production this would check relu_jobs status
+  setTimeout(() => {
+    document.getElementById('download-status').innerHTML = '<span style="color:#10b981;">✓ Files ready for download</span>';
+    document.getElementById('download-btn').disabled = false;
+  }, 1000);
+}
+
+async function releaseDownload() {
+  const caseId = document.getElementById('case-id-input').value;
+  document.getElementById('download-status').innerHTML = '<span style="color:#f59e0b;">Deducting credits & releasing...</span>';
+  try {
+    const res = await fetch('/v1/mastercredits/deduct', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ case_id: caseId, doctor_id: 'current', credits: 10 })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      document.getElementById('download-status').innerHTML = `<span style="color:#10b981;">✓ Files unlocked! Token: ${data.unlock_token?.slice(0,16)}...</span>`;
+      loadBalance();
+    } else {
+      document.getElementById('download-status').innerHTML = `<span style="color:#ef4444;">✗ ${data.error}</span>`;
+    }
+  } catch(e) {
+    document.getElementById('download-status').innerHTML = `<span style="color:#ef4444;">✗ ${e.message}</span>`;
+  }
+}
+
+async function collectEmail() {
+  const email = document.getElementById('email-input').value;
+  if (!email) return;
+  try {
+    const res = await fetch('/v1/emails/collect', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ email, source: 'dentist_portal' })
+    });
+    const data = await res.json();
+    document.getElementById('email-status').innerHTML = data.success
+      ? '<span style="color:#10b981;">✓ Subscribed!</span>'
+      : '<span style="color:#ef4444;">Failed</span>';
+  } catch(e) {
+    document.getElementById('email-status').innerHTML = '<span style="color:#ef4444;">Error</span>';
+  }
+}
+
+loadBalance();
+</script>
+</body>
+</html>

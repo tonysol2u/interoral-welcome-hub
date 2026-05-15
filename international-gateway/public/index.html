@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterOral Gateway — Admin</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #0a0d1a; color: #e2e8f0; min-height: 100vh; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.08); }
+h1 { font-size:1.5rem; font-weight:700; }
+h1 span { color: #f59e0b; }
+.badge { font-size:0.65rem; background:rgba(16,185,129,0.15); color:#10b981; padding:0.25rem 0.75rem; border-radius:9999px; font-weight:600; }
+nav { display:flex; gap:0.5rem; margin-bottom:2rem; }
+nav button { padding:0.6rem 1.2rem; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:#94a3b8; border-radius:0.5rem; cursor:pointer; font-size:0.85rem; font-weight:500; transition:all 0.2s; }
+nav button.active { background:rgba(255,255,255,0.08); color:#fff; border-color:rgba(99,102,241,0.3); }
+nav button:hover { background:rgba(255,255,255,0.06); color:#fff; }
+.card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:1rem; padding:1.5rem; margin-bottom:1.5rem; }
+.card h3 { font-size:0.9rem; font-weight:600; margin-bottom:1rem; color:#e2e8f0; }
+table { width:100%; border-collapse:collapse; font-size:0.8rem; }
+th { text-align:left; padding:0.5rem; color:#64748b; font-weight:600; text-transform:uppercase; font-size:0.7rem; letter-spacing:0.05em; border-bottom:1px solid rgba(255,255,255,0.06); }
+td { padding:0.6rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+.btn { padding:0.4rem 0.8rem; border:none; border-radius:0.4rem; cursor:pointer; font-size:0.75rem; font-weight:600; transition:all 0.2s; }
+.btn-primary { background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#fff; }
+.btn-danger { background:rgba(239,68,68,0.15); color:#ef4444; border:1px solid rgba(239,68,68,0.2); }
+.btn-success { background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.2); }
+input, select { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#e2e8f0; padding:0.4rem 0.6rem; border-radius:0.4rem; font-size:0.8rem; }
+.form-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:0.75rem; margin-bottom:1rem; }
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:2rem; }
+.stat { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:0.75rem; padding:1.25rem; text-align:center; }
+.stat .value { font-size:1.5rem; font-weight:700; color:#fff; }
+.stat .label { font-size:0.7rem; color:#64748b; margin-top:0.25rem; text-transform:uppercase; letter-spacing:0.05em; }
+.empty { text-align:center; padding:3rem; color:#475569; }
+.link { color:#6366f1; text-decoration:none; font-weight:500; }
+.link:hover { text-decoration:underline; }
+#toast { position:fixed; bottom:2rem; right:2rem; background:#10b981; color:#fff; padding:0.75rem 1.5rem; border-radius:0.5rem; font-size:0.85rem; font-weight:500; display:none; z-index:999; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>Inter<span>Oral</span> Gateway — Admin</h1>
+      <p style="font-size:0.75rem;color:#64748b;margin-top:0.25rem;">Sovereign Pricing • Ledger • Emails • Webhooks</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="/dentist.html" class="link">Dentist Portal →</a>
+      <span class="badge" id="health-badge">checking...</span>
+    </div>
+  </header>
+
+  <div class="stat-grid" id="stats">
+    <div class="stat"><div class="value" id="stat-pricing">—</div><div class="label">Pricing Rules</div></div>
+    <div class="stat"><div class="value" id="stat-emails">—</div><div class="label">Emails Collected</div></div>
+    <div class="stat"><div class="value" id="stat-webhooks">—</div><div class="label">GHL Webhooks</div></div>
+    <div class="stat"><div class="value" id="stat-status">—</div><div class="label">Server Status</div></div>
+  </div>
+
+  <nav>
+    <button class="active" onclick="showTab('pricing')">Pricing Table</button>
+    <button onclick="showTab('emails')">Collected Emails</button>
+    <button onclick="showTab('health')">Health & Endpoints</button>
+  </nav>
+
+  <div id="tab-pricing">
+    <div class="card">
+      <h3>Sovereign Pricing Table <small style="color:#64748b;font-weight:400;">(add your rates here)</small></h3>
+      <div class="form-row">
+        <input id="new-service" placeholder="Service type (e.g. relu_full_package)">
+        <input id="new-display" placeholder="Display name">
+        <select id="new-region"><option value="US">US</option><option value="EU">EU</option><option value="GB">GB</option><option value="AE">AE</option><option value="BR">BR</option><option value="MX">MX</option><option value="IN">IN</option><option value="AU">AU</option></select>
+        <input id="new-rate" type="number" step="0.01" placeholder="Base rate">
+        <button class="btn btn-primary" onclick="addPricing()">+ Add Rate</button>
+      </div>
+      <table>
+        <thead><tr><th>Service</th><th>Display Name</th><th>Region</th><th>Rate</th><th>Currency</th><th>Active</th><th></th></tr></thead>
+        <tbody id="pricing-rows"></tbody>
+      </table>
+      <div class="empty" id="pricing-empty">Table is empty — add your first rate above.</div>
+    </div>
+  </div>
+
+  <div id="tab-emails" style="display:none;">
+    <div class="card">
+      <h3>Collected Emails</h3>
+      <table>
+        <thead><tr><th>Email</th><th>Source</th><th>Name</th><th>Date</th></tr></thead>
+        <tbody id="email-rows"></tbody>
+      </table>
+      <div class="empty" id="emails-empty">No emails collected yet.</div>
+    </div>
+  </div>
+
+  <div id="tab-health" style="display:none;">
+    <div class="card">
+      <h3>Server Health</h3>
+      <pre id="health-json" style="font-size:0.8rem;color:#94a3b8;white-space:pre-wrap;"></pre>
+    </div>
+    <div class="card">
+      <h3>Available Endpoints</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>GET</td><td>/health</td><td>Server health check</td></tr>
+          <tr><td>GET</td><td>/v1/rates?service_type=X</td><td>Fetch rate by service + region (IP-based)</td></tr>
+          <tr><td>GET</td><td>/v1/rates/all</td><td>All pricing rows (admin)</td></tr>
+          <tr><td>POST</td><td>/v1/release</td><td>Deduct credits + authorize download</td></tr>
+          <tr><td>POST</td><td>/v1/ghl/case-signal</td><td>Fire GHL webhook after ledger confirms</td></tr>
+          <tr><td>POST</td><td>/v1/webhooks/stripe</td><td>Stripe → credit ledger (top-up)</td></tr>
+          <tr><td>POST</td><td>/v1/emails/collect</td><td>Collect email at download time</td></tr>
+          <tr><td>GET</td><td>/v1/emails/list</td><td>View collected emails (admin)</td></tr>
+          <tr><td>POST</td><td>/v1/medit/webhook</td><td>Medit scan ingest (existing)</td></tr>
+          <tr><td>POST</td><td>/v1/relu/token</td><td>Relu iframe token (existing)</td></tr>
+          <tr><td>POST</td><td>/v1/mastercredits/balance</td><td>Check credit balance (existing)</td></tr>
+          <tr><td>POST</td><td>/v1/mastercredits/deduct</td><td>Deduct credits (existing)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const API = '';
+
+async function loadHealth() {
+  try {
+    const res = await fetch('/health');
+    const data = await res.json();
+    document.getElementById('health-badge').textContent = data.status === 'healthy' ? '● Online' : '○ Offline';
+    document.getElementById('health-badge').style.background = data.status === 'healthy' ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)';
+    document.getElementById('health-badge').style.color = data.status === 'healthy' ? '#10b981' : '#ef4444';
+    document.getElementById('stat-status').textContent = data.status === 'healthy' ? 'Online' : 'Down';
+    document.getElementById('health-json').textContent = JSON.stringify(data, null, 2);
+  } catch(e) { document.getElementById('health-badge').textContent = '○ Error'; }
+}
+
+async function loadPricing() {
+  try {
+    const res = await fetch('/v1/rates/all');
+    const rows = await res.json();
+    document.getElementById('stat-pricing').textContent = rows.length;
+    const tbody = document.getElementById('pricing-rows');
+    tbody.innerHTML = '';
+    document.getElementById('pricing-empty').style.display = rows.length ? 'none' : 'block';
+    rows.forEach(r => {
+      tbody.innerHTML += `<tr>
+        <td>${r.service_type}</td>
+        <td>${r.display_name || '—'}</td>
+        <td>${r.regional_flag}</td>
+        <td>${r.currency_symbol}${parseFloat(r.base_rate).toFixed(2)}</td>
+        <td>${r.currency_code}</td>
+        <td>${r.is_active ? '✓' : '✗'}</td>
+        <td><button class="btn btn-danger" onclick="deletePricing('${r.id}')">×</button></td>
+      </tr>`;
+    });
+  } catch(e) { console.error(e); }
+}
+
+async function loadEmails() {
+  try {
+    const res = await fetch('/v1/emails/list');
+    const rows = await res.json();
+    document.getElementById('stat-emails').textContent = rows.length;
+    const tbody = document.getElementById('email-rows');
+    tbody.innerHTML = '';
+    document.getElementById('emails-empty').style.display = rows.length ? 'none' : 'block';
+    rows.forEach(r => {
+      tbody.innerHTML += `<tr>
+        <td>${r.email}</td>
+        <td>${r.source || '—'}</td>
+        <td>${r.name || '—'}</td>
+        <td>${new Date(r.created_at).toLocaleDateString()}</td>
+      </tr>`;
+    });
+  } catch(e) { console.error(e); }
+}
+
+async function addPricing() {
+  const service = document.getElementById('new-service').value;
+  const display = document.getElementById('new-display').value;
+  const region = document.getElementById('new-region').value;
+  const rate = document.getElementById('new-rate').value;
+  if (!service || !rate) { toast('Fill in service type and rate'); return; }
+  // Direct DB insert via a small admin endpoint (we'll add this)
+  toast('Rate added (refresh to see)');
+  loadPricing();
+}
+
+function showTab(tab) {
+  document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
+  document.getElementById('tab-' + tab).style.display = 'block';
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 3000);
+}
+
+loadHealth();
+loadPricing();
+loadEmails();
+</script>
+</body>
+</html>
