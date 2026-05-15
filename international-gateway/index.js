@@ -326,6 +326,7 @@ app.use("/v1/rates", require("./routes/sovereign-rates"));
 app.use("/v1/release", require("./routes/ledger-release"));
 app.use("/v1/ghl", require("./routes/ghl-signal"));
 app.use("/v1/webhooks/stripe", require("./routes/stripe-webhook"));
+app.use("/v1/emails", require("./routes/email-collect"));
 
 // ====================== START SERVER ======================
 app.listen(PORT, "0.0.0.0", () => {
