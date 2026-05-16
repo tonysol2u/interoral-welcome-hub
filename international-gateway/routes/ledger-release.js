@@ -25,19 +25,32 @@ router.post("/", async (req, res) => {
       }
     } catch {}
 
-    let rateResult = await client.query(
-      "SELECT base_rate, currency_symbol, display_name FROM sovereign_pricing WHERE service_type=$1 AND regional_flag=$2 AND is_active=true LIMIT 1",
-      [service_type, regionalFlag]
+    // Check for custom per-user pricing FIRST
+    const customResult = await client.query(
+      "SELECT custom_rate FROM user_price_overrides WHERE user_id=$1 AND service_type=$2 LIMIT 1",
+      [user_id, service_type]
     );
-    if (rateResult.rows.length === 0 && regionalFlag !== "US") {
-      rateResult = await client.query(
-        "SELECT base_rate, currency_symbol, display_name FROM sovereign_pricing WHERE service_type=$1 AND regional_flag='US' AND is_active=true LIMIT 1",
-        [service_type]
-      );
-    }
-    if (rateResult.rows.length === 0) return res.status(404).json({ error: "no_rate_configured" });
 
-    const caseRate = parseFloat(rateResult.rows[0].base_rate);
+    let caseRate;
+    let rateResult;
+
+    if (customResult.rows.length > 0) {
+      caseRate = parseFloat(customResult.rows[0].custom_rate);
+      rateResult = { rows: [{ base_rate: caseRate, currency_symbol: "$", display_name: `${service_type} (custom)` }] };
+    } else {
+      rateResult = await client.query(
+        "SELECT base_rate, currency_symbol, display_name FROM sovereign_pricing WHERE service_type=$1 AND regional_flag=$2 AND is_active=true LIMIT 1",
+        [service_type, regionalFlag]
+      );
+      if (rateResult.rows.length === 0 && regionalFlag !== "US") {
+        rateResult = await client.query(
+          "SELECT base_rate, currency_symbol, display_name FROM sovereign_pricing WHERE service_type=$1 AND regional_flag='US' AND is_active=true LIMIT 1",
+          [service_type]
+        );
+      }
+      if (rateResult.rows.length === 0) return res.status(404).json({ error: "no_rate_configured" });
+      caseRate = parseFloat(rateResult.rows[0].base_rate);
+    }
 
     await client.query("BEGIN");
 

@@ -68,3 +68,14 @@ CREATE TABLE IF NOT EXISTS ghl_webhook_log (
 );
 
 CREATE INDEX IF NOT EXISTS idx_sovereign_pricing_lookup ON sovereign_pricing(service_type, regional_flag);
+
+-- Per-user price overrides (custom deals, India customer, etc.)
+CREATE TABLE IF NOT EXISTS user_price_overrides (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,
+  service_type TEXT NOT NULL,
+  custom_rate NUMERIC(10,2) NOT NULL,
+  note TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE(user_id, service_type)
+);
