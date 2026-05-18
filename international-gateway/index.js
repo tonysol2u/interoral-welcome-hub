@@ -328,6 +328,7 @@ app.use("/v1/ghl", require("./routes/ghl-signal"));
 app.use("/v1/webhooks/stripe", require("./routes/stripe-webhook"));
 app.use("/v1/emails", require("./routes/email-collect"));
 app.use("/v1/admin", require("./routes/admin-dashboard"));
+app.use("/v1/checkout", require("./routes/checkout"));
 
 // ====================== START SERVER ======================
 app.listen(PORT, "0.0.0.0", () => {
